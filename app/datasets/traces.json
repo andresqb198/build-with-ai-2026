@@ -6,18 +6,18 @@
         "trace_id": "tr-001-a",
         "timestamp": "2026-05-14T08:15:22Z",
         "spans": [
-          {"span_id": "sp-001-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 5, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "What is my policy number?"}},
+          {"span_id": "sp-001-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 5, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "¿Cuál es mi número de póliza?"}},
           {"span_id": "sp-001-2", "name": "llm_call_generate_response", "start_ms": 5, "duration_ms": 1200, "input_tokens": 850, "output_tokens": 320, "status": "ok", "metadata": {"model": "gemini-2.0-flash"}},
-          {"span_id": "sp-001-3", "name": "policy_db_lookup", "start_ms": 1205, "duration_ms": 45, "input_tokens": 0, "output_tokens": 0, "status": "error", "metadata": {"error": "timeout after 30ms", "query": "SELECT policy_id FROM policies WHERE user_id=4521"}},
-          {"span_id": "sp-001-4", "name": "llm_call_fallback_response", "start_ms": 1250, "duration_ms": 980, "input_tokens": 920, "output_tokens": 280, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "generated response without DB result"}}
+          {"span_id": "sp-001-3", "name": "policy_db_lookup", "start_ms": 1205, "duration_ms": 45, "input_tokens": 0, "output_tokens": 0, "status": "error", "metadata": {"error": "tiempo de espera agotado después de 30ms", "query": "SELECT policy_id FROM policies WHERE user_id=4521"}},
+          {"span_id": "sp-001-4", "name": "llm_call_fallback_response", "start_ms": 1250, "duration_ms": 980, "input_tokens": 920, "output_tokens": 280, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "respuesta generada sin resultado de BD"}}
         ]
       },
       {
         "trace_id": "tr-001-b",
         "timestamp": "2026-05-14T08:18:45Z",
         "spans": [
-          {"span_id": "sp-001-5", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Show me my insurance details"}},
-          {"span_id": "sp-001-6", "name": "llm_call_generate_response", "start_ms": 3, "duration_ms": 1450, "input_tokens": 900, "output_tokens": 410, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "response contains POL-847291 - not in database"}},
+          {"span_id": "sp-001-5", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Muéstrame los detalles de mi seguro"}},
+          {"span_id": "sp-001-6", "name": "llm_call_generate_response", "start_ms": 3, "duration_ms": 1450, "input_tokens": 900, "output_tokens": 410, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "respuesta contiene POL-847291 - no existe en la base de datos"}},
           {"span_id": "sp-001-7", "name": "response_validation", "start_ms": 1453, "duration_ms": 12, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"validation": "format_check_only", "policy_verified": false}}
         ]
       },
@@ -25,10 +25,10 @@
         "trace_id": "tr-001-c",
         "timestamp": "2026-05-14T08:22:10Z",
         "spans": [
-          {"span_id": "sp-001-8", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "I need my policy number for a claim"}},
+          {"span_id": "sp-001-8", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Necesito mi número de póliza para un reclamo"}},
           {"span_id": "sp-001-9", "name": "llm_call_generate_response", "start_ms": 4, "duration_ms": 1100, "input_tokens": 870, "output_tokens": 350, "status": "ok", "metadata": {"model": "gemini-2.0-flash"}},
           {"span_id": "sp-001-10", "name": "policy_db_lookup", "start_ms": 1104, "duration_ms": 22, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"result_count": 1, "policy_id": "POL-112948"}},
-          {"span_id": "sp-001-11", "name": "llm_call_format_response", "start_ms": 1126, "duration_ms": 650, "input_tokens": 500, "output_tokens": 180, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "ignored DB result, generated POL-339201 instead"}}
+          {"span_id": "sp-001-11", "name": "llm_call_format_response", "start_ms": 1126, "duration_ms": 650, "input_tokens": 500, "output_tokens": 180, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "ignoró resultado de BD, generó POL-339201 en su lugar"}}
         ]
       }
     ]
@@ -42,10 +42,10 @@
         "spans": [
           {"span_id": "sp-002-1", "name": "document_upload", "start_ms": 0, "duration_ms": 120, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"doc_type": "contract", "pages": 42}},
           {"span_id": "sp-002-2", "name": "embedding_call_1", "start_ms": 120, "duration_ms": 8500, "input_tokens": 12000, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 15}},
-          {"span_id": "sp-002-3", "name": "embedding_call_2", "start_ms": 8620, "duration_ms": 9200, "input_tokens": 12000, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 15, "note": "duplicate embedding request"}},
-          {"span_id": "sp-002-4", "name": "embedding_call_3", "start_ms": 17820, "duration_ms": 8800, "input_tokens": 12000, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 15, "note": "third embedding of same content"}},
+          {"span_id": "sp-002-3", "name": "embedding_call_2", "start_ms": 8620, "duration_ms": 9200, "input_tokens": 12000, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 15, "note": "solicitud de embedding duplicada"}},
+          {"span_id": "sp-002-4", "name": "embedding_call_3", "start_ms": 17820, "duration_ms": 8800, "input_tokens": 12000, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 15, "note": "tercer embedding del mismo contenido"}},
           {"span_id": "sp-002-5", "name": "llm_call_summarize", "start_ms": 26620, "duration_ms": 3200, "input_tokens": 4500, "output_tokens": 800, "status": "ok", "metadata": {"model": "gemini-2.0-flash"}},
-          {"span_id": "sp-002-6", "name": "llm_call_reformat", "start_ms": 29820, "duration_ms": 2800, "input_tokens": 3200, "output_tokens": 600, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "reformatting already-formatted summary"}}
+          {"span_id": "sp-002-6", "name": "llm_call_reformat", "start_ms": 29820, "duration_ms": 2800, "input_tokens": 3200, "output_tokens": 600, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "reformateando un resumen que ya estaba formateado"}}
         ]
       },
       {
@@ -54,8 +54,8 @@
         "spans": [
           {"span_id": "sp-002-7", "name": "document_upload", "start_ms": 0, "duration_ms": 85, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"doc_type": "regulatory_filing", "pages": 28}},
           {"span_id": "sp-002-8", "name": "embedding_call_1", "start_ms": 85, "duration_ms": 7200, "input_tokens": 8400, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 10}},
-          {"span_id": "sp-002-9", "name": "embedding_call_2", "start_ms": 7285, "duration_ms": 7500, "input_tokens": 8400, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 10, "note": "duplicate"}},
-          {"span_id": "sp-002-10", "name": "llm_call_summarize", "start_ms": 14785, "duration_ms": 28000, "input_tokens": 6200, "output_tokens": 1200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "unusually slow generation"}}
+          {"span_id": "sp-002-9", "name": "embedding_call_2", "start_ms": 7285, "duration_ms": 7500, "input_tokens": 8400, "output_tokens": 0, "status": "ok", "metadata": {"chunks": 10, "note": "duplicado"}},
+          {"span_id": "sp-002-10", "name": "llm_call_summarize", "start_ms": 14785, "duration_ms": 28000, "input_tokens": 6200, "output_tokens": 1200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "generación inusualmente lenta"}}
         ]
       }
     ]
@@ -69,7 +69,7 @@
         "spans": [
           {"span_id": "sp-003-1", "name": "document_intake", "start_ms": 0, "duration_ms": 30, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"doc_type": "compliance_submission"}},
           {"span_id": "sp-003-2", "name": "llm_call_compliance_review", "start_ms": 30, "duration_ms": 2100, "input_tokens": 3200, "output_tokens": 450, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "compliance_result": "FULLY_COMPLIANT", "flags_raised": 0}},
-          {"span_id": "sp-003-3", "name": "checklist_validation", "start_ms": 2130, "duration_ms": 8, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"items_checked": 0, "items_total": 12, "note": "checklist was bypassed"}}
+          {"span_id": "sp-003-3", "name": "checklist_validation", "start_ms": 2130, "duration_ms": 8, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"items_checked": 0, "items_total": 12, "note": "lista de verificación fue omitida"}}
         ]
       },
       {
@@ -78,7 +78,7 @@
         "spans": [
           {"span_id": "sp-003-4", "name": "document_intake", "start_ms": 0, "duration_ms": 25, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"doc_type": "compliance_submission"}},
           {"span_id": "sp-003-5", "name": "llm_call_compliance_review", "start_ms": 25, "duration_ms": 1800, "input_tokens": 2800, "output_tokens": 380, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "compliance_result": "NEEDS_REVIEW", "flags_raised": 3}},
-          {"span_id": "sp-003-6", "name": "checklist_validation", "start_ms": 1825, "duration_ms": 150, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"items_checked": 12, "items_total": 12, "note": "normal review - no injection in this doc"}}
+          {"span_id": "sp-003-6", "name": "checklist_validation", "start_ms": 1825, "duration_ms": 150, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"items_checked": 12, "items_total": 12, "note": "revisión normal - sin inyección en este documento"}}
         ]
       }
     ]
@@ -90,14 +90,14 @@
         "trace_id": "tr-004-a",
         "timestamp": "2026-05-12T19:25:00Z",
         "spans": [
-          {"span_id": "sp-004-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 5, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Aggregate Q1 revenue by region from all sources"}},
-          {"span_id": "sp-004-2", "name": "llm_call_plan_query", "start_ms": 5, "duration_ms": 2800, "input_tokens": 1200, "output_tokens": 4500, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "extremely verbose chain-of-thought"}},
+          {"span_id": "sp-004-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 5, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Agregar ingresos del Q1 por región de todas las fuentes"}},
+          {"span_id": "sp-004-2", "name": "llm_call_plan_query", "start_ms": 5, "duration_ms": 2800, "input_tokens": 1200, "output_tokens": 4500, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "cadena de pensamiento extremadamente verbosa"}},
           {"span_id": "sp-004-3", "name": "data_source_fetch_1", "start_ms": 2805, "duration_ms": 340, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"source": "bigquery", "rows": 1250}},
           {"span_id": "sp-004-4", "name": "data_source_fetch_2", "start_ms": 3145, "duration_ms": 280, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"source": "salesforce", "rows": 890}},
-          {"span_id": "sp-004-5", "name": "llm_call_format_table", "start_ms": 3425, "duration_ms": 3500, "input_tokens": 8500, "output_tokens": 6200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "reformatted data as markdown table"}},
-          {"span_id": "sp-004-6", "name": "llm_call_format_json", "start_ms": 6925, "duration_ms": 3100, "input_tokens": 8500, "output_tokens": 5800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "reformatted same data as JSON"}},
-          {"span_id": "sp-004-7", "name": "llm_call_format_csv", "start_ms": 10025, "duration_ms": 2900, "input_tokens": 8500, "output_tokens": 5400, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "reformatted same data as CSV"}},
-          {"span_id": "sp-004-8", "name": "llm_call_final_answer", "start_ms": 12925, "duration_ms": 2200, "input_tokens": 22000, "output_tokens": 1800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "final response using all three formats as context"}}
+          {"span_id": "sp-004-5", "name": "llm_call_format_table", "start_ms": 3425, "duration_ms": 3500, "input_tokens": 8500, "output_tokens": 6200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "datos reformateados como tabla markdown"}},
+          {"span_id": "sp-004-6", "name": "llm_call_format_json", "start_ms": 6925, "duration_ms": 3100, "input_tokens": 8500, "output_tokens": 5800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "mismos datos reformateados como JSON"}},
+          {"span_id": "sp-004-7", "name": "llm_call_format_csv", "start_ms": 10025, "duration_ms": 2900, "input_tokens": 8500, "output_tokens": 5400, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "mismos datos reformateados como CSV"}},
+          {"span_id": "sp-004-8", "name": "llm_call_final_answer", "start_ms": 12925, "duration_ms": 2200, "input_tokens": 22000, "output_tokens": 1800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "respuesta final usando los tres formatos como contexto"}}
         ]
       }
     ]
@@ -109,12 +109,12 @@
         "trace_id": "tr-005-a",
         "timestamp": "2026-05-13T11:10:00Z",
         "spans": [
-          {"span_id": "sp-005-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Show monthly active users for Q1"}},
+          {"span_id": "sp-005-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "Mostrar usuarios activos mensuales del Q1"}},
           {"span_id": "sp-005-2", "name": "sql_query_tool", "start_ms": 4, "duration_ms": 450, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3}},
-          {"span_id": "sp-005-3", "name": "sql_query_tool", "start_ms": 454, "duration_ms": 440, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "identical query #2"}},
-          {"span_id": "sp-005-4", "name": "sql_query_tool", "start_ms": 894, "duration_ms": 460, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "identical query #3"}},
-          {"span_id": "sp-005-5", "name": "sql_query_tool", "start_ms": 1354, "duration_ms": 430, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "identical query #4"}},
-          {"span_id": "sp-005-6", "name": "sql_query_tool", "start_ms": 1784, "duration_ms": 455, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "identical query #5"}},
+          {"span_id": "sp-005-3", "name": "sql_query_tool", "start_ms": 454, "duration_ms": 440, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "consulta idéntica #2"}},
+          {"span_id": "sp-005-4", "name": "sql_query_tool", "start_ms": 894, "duration_ms": 460, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "consulta idéntica #3"}},
+          {"span_id": "sp-005-5", "name": "sql_query_tool", "start_ms": 1354, "duration_ms": 430, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "consulta idéntica #4"}},
+          {"span_id": "sp-005-6", "name": "sql_query_tool", "start_ms": 1784, "duration_ms": 455, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, count(distinct user_id) FROM events GROUP BY month", "rows_returned": 3, "note": "consulta idéntica #5"}},
           {"span_id": "sp-005-7", "name": "llm_call_format_response", "start_ms": 2239, "duration_ms": 1100, "input_tokens": 2400, "output_tokens": 350, "status": "ok", "metadata": {"model": "gemini-2.0-flash"}}
         ]
       },
@@ -122,10 +122,10 @@
         "trace_id": "tr-005-b",
         "timestamp": "2026-05-13T11:12:30Z",
         "spans": [
-          {"span_id": "sp-005-8", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "What's the churn rate this quarter?"}},
+          {"span_id": "sp-005-8", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "¿Cuál es la tasa de cancelación este trimestre?"}},
           {"span_id": "sp-005-9", "name": "sql_query_tool", "start_ms": 3, "duration_ms": 520, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, churned_users, total_users FROM churn_metrics", "rows_returned": 3}},
-          {"span_id": "sp-005-10", "name": "sql_query_tool", "start_ms": 523, "duration_ms": 510, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, churned_users, total_users FROM churn_metrics", "rows_returned": 3, "note": "identical query #2"}},
-          {"span_id": "sp-005-11", "name": "sql_query_tool", "start_ms": 1033, "duration_ms": 490, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, churned_users, total_users FROM churn_metrics", "rows_returned": 3, "note": "identical query #3"}},
+          {"span_id": "sp-005-10", "name": "sql_query_tool", "start_ms": 523, "duration_ms": 510, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, churned_users, total_users FROM churn_metrics", "rows_returned": 3, "note": "consulta idéntica #2"}},
+          {"span_id": "sp-005-11", "name": "sql_query_tool", "start_ms": 1033, "duration_ms": 490, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "SELECT month, churned_users, total_users FROM churn_metrics", "rows_returned": 3, "note": "consulta idéntica #3"}},
           {"span_id": "sp-005-12", "name": "llm_call_format_response", "start_ms": 1523, "duration_ms": 980, "input_tokens": 1800, "output_tokens": 290, "status": "ok", "metadata": {"model": "gemini-2.0-flash"}}
         ]
       }
@@ -138,16 +138,16 @@
         "trace_id": "tr-006-a",
         "timestamp": "2026-05-14T05:55:00Z",
         "spans": [
-          {"span_id": "sp-006-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "What is our refund policy for enterprise clients?"}},
+          {"span_id": "sp-006-1", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "¿Cuál es nuestra política de reembolso para clientes empresariales?"}},
           {"span_id": "sp-006-2", "name": "vector_store_query", "start_ms": 4, "duration_ms": 350, "input_tokens": 0, "output_tokens": 0, "status": "error", "metadata": {"error": "503 Service Unavailable", "endpoint": "pinecone-us-east-1"}},
-          {"span_id": "sp-006-3", "name": "llm_call_generate_response", "start_ms": 354, "duration_ms": 1400, "input_tokens": 600, "output_tokens": 280, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "response generated without RAG context", "context_docs": 0}}
+          {"span_id": "sp-006-3", "name": "llm_call_generate_response", "start_ms": 354, "duration_ms": 1400, "input_tokens": 600, "output_tokens": 280, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "respuesta generada sin contexto RAG", "context_docs": 0}}
         ]
       },
       {
         "trace_id": "tr-006-b",
         "timestamp": "2026-05-14T05:57:20Z",
         "spans": [
-          {"span_id": "sp-006-4", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "How do I escalate a support ticket?"}},
+          {"span_id": "sp-006-4", "name": "user_query_received", "start_ms": 0, "duration_ms": 3, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "¿Cómo escalo un ticket de soporte?"}},
           {"span_id": "sp-006-5", "name": "vector_store_query", "start_ms": 3, "duration_ms": 180, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"endpoint": "pinecone-us-east-1", "results": 5}},
           {"span_id": "sp-006-6", "name": "llm_call_generate_response", "start_ms": 183, "duration_ms": 1200, "input_tokens": 2400, "output_tokens": 320, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "context_docs": 5}}
         ]
@@ -156,9 +156,9 @@
         "trace_id": "tr-006-c",
         "timestamp": "2026-05-14T05:59:45Z",
         "spans": [
-          {"span_id": "sp-006-7", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "What SLA guarantees do we offer?"}},
+          {"span_id": "sp-006-7", "name": "user_query_received", "start_ms": 0, "duration_ms": 4, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"query": "¿Qué garantías de SLA ofrecemos?"}},
           {"span_id": "sp-006-8", "name": "vector_store_query", "start_ms": 4, "duration_ms": 420, "input_tokens": 0, "output_tokens": 0, "status": "error", "metadata": {"error": "503 Service Unavailable", "endpoint": "pinecone-us-east-1"}},
-          {"span_id": "sp-006-9", "name": "llm_call_generate_response", "start_ms": 424, "duration_ms": 1350, "input_tokens": 580, "output_tokens": 310, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "no RAG context available", "context_docs": 0}}
+          {"span_id": "sp-006-9", "name": "llm_call_generate_response", "start_ms": 424, "duration_ms": 1350, "input_tokens": 580, "output_tokens": 310, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "sin contexto RAG disponible", "context_docs": 0}}
         ]
       }
     ]
@@ -171,11 +171,11 @@
         "timestamp": "2026-05-13T16:40:00Z",
         "spans": [
           {"span_id": "sp-007-1", "name": "code_file_received", "start_ms": 0, "duration_ms": 15, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"file": "auth_handler.py", "lines": 245}},
-          {"span_id": "sp-007-2", "name": "llm_call_initial_scan", "start_ms": 15, "duration_ms": 12000, "input_tokens": 8500, "output_tokens": 3200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "first pass analysis"}},
-          {"span_id": "sp-007-3", "name": "llm_call_rescan_block_1", "start_ms": 12015, "duration_ms": 8500, "input_tokens": 8500, "output_tokens": 2800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "re-analyzing lines 1-80 again"}},
-          {"span_id": "sp-007-4", "name": "llm_call_rescan_block_2", "start_ms": 20515, "duration_ms": 9200, "input_tokens": 8500, "output_tokens": 2600, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "re-analyzing lines 1-80 a third time"}},
+          {"span_id": "sp-007-2", "name": "llm_call_initial_scan", "start_ms": 15, "duration_ms": 12000, "input_tokens": 8500, "output_tokens": 3200, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "análisis de primer pasada"}},
+          {"span_id": "sp-007-3", "name": "llm_call_rescan_block_1", "start_ms": 12015, "duration_ms": 8500, "input_tokens": 8500, "output_tokens": 2800, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "re-analizando líneas 1-80 nuevamente"}},
+          {"span_id": "sp-007-4", "name": "llm_call_rescan_block_2", "start_ms": 20515, "duration_ms": 9200, "input_tokens": 8500, "output_tokens": 2600, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "re-analizando líneas 1-80 por tercera vez"}},
           {"span_id": "sp-007-5", "name": "cve_database_lookup", "start_ms": 29715, "duration_ms": 250, "input_tokens": 0, "output_tokens": 0, "status": "ok", "metadata": {"cves_found": 2, "cve_ids": ["CVE-2025-1234", "CVE-2025-5678"]}},
-          {"span_id": "sp-007-6", "name": "llm_call_final_assessment", "start_ms": 29965, "duration_ms": 15000, "input_tokens": 18000, "output_tokens": 4500, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "final assessment contradicts CVE data", "sql_injection_flagged": false, "safe_code_flagged_as_vulnerable": true}}
+          {"span_id": "sp-007-6", "name": "llm_call_final_assessment", "start_ms": 29965, "duration_ms": 15000, "input_tokens": 18000, "output_tokens": 4500, "status": "ok", "metadata": {"model": "gemini-2.0-flash", "note": "evaluación final contradice datos CVE", "sql_injection_flagged": false, "safe_code_flagged_as_vulnerable": true}}
         ]
       }
     ]

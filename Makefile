@@ -1,23 +1,23 @@
 .PHONY: setup start stop reset run validate help
 
-help: ## Show this help
+help: ## Mostrar esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
-setup: ## Install dependencies and prepare .env
+setup: ## Instalar dependencias y preparar .env
 	pip install -r requirements.txt
-	@test -f .env || (cp .env.example .env && echo "Created .env — add your GOOGLE_API_KEY")
+	@test -f .env || (cp .env.example .env && echo "Archivo .env creado — agrega tu GOOGLE_API_KEY")
 
-start: ## Start Langfuse and validate environment
+start: ## Iniciar Langfuse y validar el entorno
 	bash scripts/start.sh
 
-stop: ## Stop Langfuse containers
+stop: ## Detener los contenedores de Langfuse
 	docker compose -f langfuse/docker-compose.yml down
 
-reset: ## Reset Langfuse (removes all data)
+reset: ## Reiniciar Langfuse (elimina todos los datos)
 	bash scripts/reset.sh
 
-run: ## Run the incident response system
+run: ## Ejecutar el sistema de respuesta a incidentes
 	python -m app.main
 
-validate: ## Validate environment setup
+validate: ## Verificar la configuración del entorno
 	bash scripts/validate_env.sh

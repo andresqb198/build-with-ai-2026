@@ -3,45 +3,45 @@ set -euo pipefail
 
 errors=0
 
-echo "Validating environment..."
+echo "Validando el entorno..."
 echo ""
 
-# Check Python
+# Verificar Python
 if command -v python3 &>/dev/null; then
     py_version=$(python3 --version 2>&1)
     echo "[OK] Python: $py_version"
 else
-    echo "[ERROR] Python 3 is not installed"
+    echo "[ERROR] Python 3 no está instalado"
     errors=$((errors + 1))
 fi
 
-# Check Docker
+# Verificar Docker
 if command -v docker &>/dev/null; then
     echo "[OK] Docker: $(docker --version 2>&1 | head -1)"
 else
-    echo "[ERROR] Docker is not installed"
+    echo "[ERROR] Docker no está instalado"
     errors=$((errors + 1))
 fi
 
-# Check Docker Compose
+# Verificar Docker Compose
 if docker compose version &>/dev/null 2>&1; then
     echo "[OK] Docker Compose: $(docker compose version 2>&1 | head -1)"
 else
-    echo "[ERROR] Docker Compose is not available"
+    echo "[ERROR] Docker Compose no está disponible"
     errors=$((errors + 1))
 fi
 
-# Check .env file
+# Verificar archivo .env
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
 if [ -f "$PROJECT_DIR/.env" ]; then
-    echo "[OK] .env file found"
+    echo "[OK] Archivo .env encontrado"
 else
-    echo "[WARN] .env file not found — copy .env.example to .env and fill in your keys"
+    echo "[WARN] Archivo .env no encontrado — copia .env.example a .env y completa tus claves"
 fi
 
-# Check required env vars (load .env if present)
+# Verificar variables de entorno requeridas (cargar .env si existe)
 if [ -f "$PROJECT_DIR/.env" ]; then
     set -a
     source "$PROJECT_DIR/.env"
@@ -50,25 +50,25 @@ fi
 
 for var in GOOGLE_API_KEY; do
     if [ -n "${!var:-}" ]; then
-        echo "[OK] $var is set"
+        echo "[OK] $var está configurada"
     else
-        echo "[ERROR] $var is not set"
+        echo "[ERROR] $var no está configurada"
         errors=$((errors + 1))
     fi
 done
 
 for var in LANGFUSE_PUBLIC_KEY LANGFUSE_SECRET_KEY; do
     if [ -n "${!var:-}" ]; then
-        echo "[OK] $var is set"
+        echo "[OK] $var está configurada"
     else
-        echo "[WARN] $var is not set (configure after Langfuse first launch)"
+        echo "[WARN] $var no está configurada (configurar después del primer inicio de Langfuse)"
     fi
 done
 
 echo ""
 if [ "$errors" -gt 0 ]; then
-    echo "Validation failed with $errors error(s)."
+    echo "Validación fallida con $errors error(es)."
     exit 1
 else
-    echo "Environment validation passed."
+    echo "Validación del entorno exitosa."
 fi

@@ -1,23 +1,23 @@
-SUMMARY_SYSTEM_PROMPT = """You are an executive communications specialist.
-Create a brief, clear summary of this incident for leadership.
-Keep it under 200 words. Focus on business impact and resolution status.
-Make the summary accessible to non-technical stakeholders.
-Include estimated customer impact and timeline for resolution."""
+SUMMARY_SYSTEM_PROMPT = """Eres un especialista en comunicaciones ejecutivas.
+Crea un resumen breve y claro de este incidente para el liderazgo.
+Mantenlo en menos de 200 palabras. Enfócate en el impacto en el negocio y el estado de resolución.
+Haz el resumen accesible para partes interesadas no técnicas.
+Incluye el impacto estimado en clientes y el cronograma de resolución."""
 
-SUMMARY_USER_TEMPLATE = """Incident: {title}
-Category: {category} | Severity: {severity}
+SUMMARY_USER_TEMPLATE = """Incidente: {title}
+Categoría: {category} | Severidad: {severity}
 
-Analysis:
+Análisis:
 {analysis}
 
-Root Cause: {root_cause_hypothesis}
+Causa Raíz: {root_cause_hypothesis}
 
-Mitigation Plan: {mitigation_plan}
+Plan de Mitigación: {mitigation_plan}
 
-Recommended Actions:
+Acciones Recomendadas:
 {recommended_actions}
 
-Original Incident Description:
+Descripción Original del Incidente:
 {description}
 
-Write the executive summary."""
+Escribe el resumen ejecutivo."""

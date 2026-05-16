@@ -1,10 +1,10 @@
 # Build with AI Medellín 2026
 
-**AI Reliability & Observability Workshop**
+**Taller de Confiabilidad y Observabilidad de Sistemas de IA**
 
-A hands-on workshop where you act as the new AI Reliability Team at Google Cloud. Your mission: stabilize and observe a flawed AI incident response system using LangGraph, Gemini, and Langfuse.
+Un taller práctico donde actúas como el nuevo Equipo de Confiabilidad de IA en Google Cloud. Tu misión: estabilizar y observar un sistema de respuesta a incidentes de IA con fallas intencionales, usando LangGraph, Gemini y Langfuse.
 
-## Architecture
+## Arquitectura
 
 ```
 START → classify_incident
@@ -18,100 +18,100 @@ START → classify_incident
                                   generate_summary → END
 ```
 
-**Agents:**
-- **Incident Classifier** — Categorizes incidents by type and severity
-- **Log Analyzer** — Analyzes traces, spans, and metrics to identify root causes
-- **Mitigation Specialist** — Proposes fixes based on analysis and runbooks
-- **Executive Summary** — Creates leadership-ready summaries
+**Agentes:**
+- **Clasificador de Incidentes** — Categoriza incidentes por tipo y severidad
+- **Analizador de Logs** — Analiza trazas, spans y métricas para identificar causas raíz
+- **Especialista en Mitigación** — Propone correcciones basadas en el análisis y runbooks
+- **Resumen Ejecutivo** — Genera resúmenes listos para liderazgo
 
-## Prerequisites
+## Prerrequisitos
 
 - Python 3.11+
 - Docker & Docker Compose
-- Google Gemini API key ([get one here](https://aistudio.google.com/apikey))
+- API key de Google Gemini ([obtén una aquí](https://aistudio.google.com/apikey))
 
-## Quick Start
+## Inicio Rápido
 
 ```bash
-# 1. Clone and enter the project
+# 1. Clonar y entrar al proyecto
 git clone https://github.com/andresqb198/build-with-ai-2026.git
 cd build-with-ai-2026
 
-# 2. Setup environment
+# 2. Configurar el entorno
 cp .env.example .env
-# Edit .env and add your GOOGLE_API_KEY
+# Editar .env y agregar tu GOOGLE_API_KEY
 
-# 3. Install dependencies and start services
+# 3. Instalar dependencias e iniciar servicios
 make setup
 make start
 
-# 4. Open Langfuse and create an account
-# Visit http://localhost:3000
-# Create a project and copy the API keys to your .env file
+# 4. Abrir Langfuse y crear una cuenta
+# Visitar http://localhost:3000
+# Crear un proyecto y copiar las API keys a tu archivo .env
 
-# 5. Run the system
+# 5. Ejecutar el sistema
 make run
 ```
 
-## Environment Variables
+## Variables de Entorno
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GOOGLE_API_KEY` | Yes | Gemini API key |
-| `LANGFUSE_PUBLIC_KEY` | Yes* | From Langfuse project settings |
-| `LANGFUSE_SECRET_KEY` | Yes* | From Langfuse project settings |
-| `LANGFUSE_HOST` | No | Default: `http://localhost:3000` |
+| Variable | Requerida | Descripción |
+|----------|-----------|-------------|
+| `GOOGLE_API_KEY` | Sí | API key de Gemini |
+| `LANGFUSE_PUBLIC_KEY` | Sí* | Desde la configuración del proyecto en Langfuse |
+| `LANGFUSE_SECRET_KEY` | Sí* | Desde la configuración del proyecto en Langfuse |
+| `LANGFUSE_HOST` | No | Por defecto: `http://localhost:3000` |
 
-*Required for tracing. Configure after Langfuse first launch.
+*Requeridas para el rastreo. Configurar después del primer inicio de Langfuse.
 
-## Langfuse Setup
+## Configuración de Langfuse
 
-1. Run `make start` to launch Langfuse
-2. Open http://localhost:3000
-3. Create an account (local only, no email verification needed)
-4. Create a new project
-5. Go to **Settings → API Keys** and copy the keys to your `.env` file
+1. Ejecutar `make start` para lanzar Langfuse
+2. Abrir http://localhost:3000
+3. Crear una cuenta (solo local, sin verificación de correo)
+4. Crear un nuevo proyecto
+5. Ir a **Settings → API Keys** y copiar las claves a tu archivo `.env`
 
-## Available Commands
+## Comandos Disponibles
 
 ```bash
-make help       # Show all commands
-make setup      # Install dependencies
-make start      # Start Langfuse + validate env
-make run        # Run the incident response system
-make stop       # Stop Langfuse
-make reset      # Reset all Langfuse data
-make validate   # Check environment setup
+make help       # Mostrar todos los comandos
+make setup      # Instalar dependencias
+make start      # Iniciar Langfuse + validar entorno
+make run        # Ejecutar el sistema de respuesta a incidentes
+make stop       # Detener Langfuse
+make reset      # Reiniciar todos los datos de Langfuse
+make validate   # Verificar la configuración del entorno
 ```
 
-## Project Structure
+## Estructura del Proyecto
 
 ```
 app/
-├── agents/         # Agent implementations (classifier, analyzer, mitigation, summary)
-├── graphs/         # LangGraph orchestration and state definition
-├── prompts/        # Prompt templates for each agent
-├── tools/          # Tool functions (data loading, trace analysis, runbooks)
-├── datasets/       # Local JSON datasets (incidents, traces, metrics)
-├── telemetry/      # Langfuse integration
-├── main.py         # CLI entry point
-└── config.py       # Environment configuration
+├── agents/         # Implementación de agentes (clasificador, analizador, mitigación, resumen)
+├── graphs/         # Orquestación LangGraph y definición de estado
+├── prompts/        # Plantillas de prompts para cada agente
+├── tools/          # Funciones de herramientas (carga de datos, análisis de trazas, runbooks)
+├── datasets/       # Datasets locales en JSON (incidentes, trazas, métricas)
+├── telemetry/      # Integración con Langfuse
+├── main.py         # Punto de entrada CLI
+└── config.py       # Configuración del entorno
 langfuse/
 └── docker-compose.yml
 scripts/
-├── start.sh        # Full setup script
-├── reset.sh        # Reset workshop state
-└── validate_env.sh # Environment validation
+├── start.sh        # Script de inicio completo
+├── reset.sh        # Reiniciar el estado del taller
+└── validate_env.sh # Validación del entorno
 ```
 
-## Workshop
+## Taller
 
-Select an incident from the dashboard, run the agent pipeline, and observe the execution in Langfuse. Look for:
+Selecciona un incidente del panel, ejecuta el pipeline de agentes y observa la ejecución en Langfuse. Busca:
 
-- Execution traces and span timelines
-- Token usage per agent step
-- Latency patterns across the pipeline
-- Agent decision flows and routing
-- Anomalies in the trace data
+- Trazas de ejecución y cronogramas de spans
+- Uso de tokens por paso del agente
+- Patrones de latencia a lo largo del pipeline
+- Flujos de decisión y enrutamiento de agentes
+- Anomalías en los datos de trazas
 
-The system has intentional issues for you to discover through observability. Happy debugging!
+El sistema tiene problemas intencionales que debes descubrir a través de la observabilidad. ¡Buena depuración!

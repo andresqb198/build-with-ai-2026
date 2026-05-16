@@ -5,44 +5,44 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo "============================================"
-echo "  AI Incident Response System — Setup"
+echo "  Sistema de Respuesta a Incidentes de IA"
 echo "============================================"
 echo ""
 
-# Validate environment
+# Validar entorno
 bash "$SCRIPT_DIR/validate_env.sh"
 
-# Install dependencies if needed
+# Instalar dependencias si es necesario
 if ! python3 -c "import langchain" 2>/dev/null; then
     echo ""
-    echo "Installing Python dependencies..."
+    echo "Instalando dependencias de Python..."
     pip install -r "$PROJECT_DIR/requirements.txt"
 fi
 
-# Start Langfuse
+# Iniciar Langfuse
 echo ""
-echo "Starting Langfuse..."
+echo "Iniciando Langfuse..."
 docker compose -f "$PROJECT_DIR/langfuse/docker-compose.yml" up -d
 
-echo "Waiting for Langfuse to be ready..."
+echo "Esperando que Langfuse esté listo..."
 for i in $(seq 1 30); do
     if curl -s http://localhost:3000 >/dev/null 2>&1; then
-        echo "Langfuse is ready!"
+        echo "¡Langfuse está listo!"
         break
     fi
     if [ "$i" -eq 30 ]; then
-        echo "WARNING: Langfuse may not be ready yet. Check http://localhost:3000"
+        echo "ADVERTENCIA: Langfuse puede no estar listo aún. Verifica http://localhost:3000"
     fi
     sleep 2
 done
 
 echo ""
 echo "============================================"
-echo "  Setup complete!"
+echo "  ¡Configuración completa!"
 echo ""
 echo "  Langfuse UI: http://localhost:3000"
-echo "  (Create an account on first visit)"
+echo "  (Crea una cuenta en la primera visita)"
 echo ""
-echo "  To run the workshop:"
+echo "  Para ejecutar el taller:"
 echo "    python -m app.main"
 echo "============================================"

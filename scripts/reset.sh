@@ -4,12 +4,12 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
-echo "Resetting workshop environment..."
+echo "Reiniciando el entorno del taller..."
 echo ""
 
-# Stop and remove Langfuse containers + volumes
+# Detener y eliminar contenedores + volúmenes de Langfuse
 docker compose -f "$PROJECT_DIR/langfuse/docker-compose.yml" down -v 2>/dev/null || true
 
-echo "Langfuse data cleared."
+echo "Datos de Langfuse eliminados."
 echo ""
-echo "To restart, run: ./scripts/start.sh"
+echo "Para reiniciar, ejecuta: ./scripts/start.sh"

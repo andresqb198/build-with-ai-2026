@@ -1,52 +1,52 @@
 RUNBOOKS = {
     "hallucination": (
-        "1. Enable output validation against source data\n"
-        "2. Add retrieval-augmented generation (RAG) with citation requirements\n"
-        "3. Implement confidence scoring with threshold-based fallback\n"
-        "4. Add human-in-the-loop review for low-confidence outputs\n"
-        "5. Log all generated identifiers and cross-reference with database"
+        "1. Habilitar validación de salida contra datos de origen\n"
+        "2. Agregar generación aumentada por recuperación (RAG) con requisitos de citas\n"
+        "3. Implementar puntuación de confianza con fallback basado en umbrales\n"
+        "4. Agregar revisión humana en el bucle para salidas de baja confianza\n"
+        "5. Registrar todos los identificadores generados y cruzarlos con la base de datos"
     ),
     "latency": (
-        "1. Profile the agent execution to identify bottleneck spans\n"
-        "2. Check for redundant or sequential calls that could be parallelized\n"
-        "3. Implement request timeout with graceful degradation\n"
-        "4. Add caching for repeated embedding or retrieval calls\n"
-        "5. Consider model downgrade for non-critical intermediate steps"
+        "1. Perfilar la ejecución del agente para identificar spans cuello de botella\n"
+        "2. Verificar llamadas redundantes o secuenciales que podrían paralelizarse\n"
+        "3. Implementar tiempo de espera de solicitudes con degradación elegante\n"
+        "4. Agregar caché para llamadas repetidas de embedding o recuperación\n"
+        "5. Considerar cambiar a un modelo más ligero en pasos intermedios no críticos"
     ),
     "security": (
-        "1. Implement input sanitization and prompt injection detection\n"
-        "2. Add system prompt hardening with explicit ignore-override instructions\n"
-        "3. Separate user content from system instructions with delimiter tokens\n"
-        "4. Enable output filtering for policy-violating responses\n"
-        "5. Add audit logging for all compliance-related decisions"
+        "1. Implementar sanitización de entradas y detección de inyección de prompts\n"
+        "2. Fortalecer el prompt del sistema con instrucciones explícitas de ignorar sobreescrituras\n"
+        "3. Separar el contenido del usuario de las instrucciones del sistema con tokens delimitadores\n"
+        "4. Habilitar filtrado de salida para respuestas que violan políticas\n"
+        "5. Agregar registro de auditoría para todas las decisiones relacionadas con cumplimiento"
     ),
     "cost": (
-        "1. Audit token usage per agent step to identify waste\n"
-        "2. Implement token budgets per request with early termination\n"
-        "3. Remove redundant reformatting or chain-of-thought steps\n"
-        "4. Cache frequently requested data to avoid re-processing\n"
-        "5. Set up cost alerts and automatic throttling at spend thresholds"
+        "1. Auditar el uso de tokens por paso del agente para identificar desperdicios\n"
+        "2. Implementar presupuestos de tokens por solicitud con terminación anticipada\n"
+        "3. Eliminar pasos redundantes de reformateo o cadena de pensamiento\n"
+        "4. Cachear datos solicitados frecuentemente para evitar reprocesamiento\n"
+        "5. Configurar alertas de costo y estrangulamiento automático en umbrales de gasto"
     ),
     "tool_misuse": (
-        "1. Add deduplication logic before tool execution\n"
-        "2. Implement tool call caching with TTL for identical inputs\n"
-        "3. Set maximum tool invocations per request\n"
-        "4. Add circuit breaker for repeated identical calls\n"
-        "5. Review agent prompt to reduce unnecessary verification loops"
+        "1. Agregar lógica de deduplicación antes de la ejecución de herramientas\n"
+        "2. Implementar caché de llamadas de herramientas con TTL para entradas idénticas\n"
+        "3. Establecer un máximo de invocaciones de herramientas por solicitud\n"
+        "4. Agregar circuit breaker para llamadas idénticas repetidas\n"
+        "5. Revisar el prompt del agente para reducir bucles de verificación innecesarios"
     ),
     "infrastructure": (
-        "1. Implement retry logic with exponential backoff\n"
-        "2. Add circuit breaker for failing external services\n"
-        "3. Configure fallback data sources or cached responses\n"
-        "4. Set up health checks and alerting for dependent services\n"
-        "5. Ensure the agent communicates partial context to users"
+        "1. Implementar lógica de reintentos con retroceso exponencial\n"
+        "2. Agregar circuit breaker para servicios externos con fallas\n"
+        "3. Configurar fuentes de datos de respaldo o respuestas en caché\n"
+        "4. Configurar verificaciones de salud y alertas para servicios dependientes\n"
+        "5. Asegurarse de que el agente comunique contexto parcial a los usuarios"
     ),
     "unknown": (
-        "1. Collect additional diagnostic data and traces\n"
-        "2. Escalate to the on-call engineering team\n"
-        "3. Enable verbose logging for the affected service\n"
-        "4. Review recent deployments and configuration changes\n"
-        "5. Open a war room if customer impact is confirmed"
+        "1. Recopilar datos de diagnóstico adicionales y trazas\n"
+        "2. Escalar al equipo de ingeniería de guardia\n"
+        "3. Habilitar registro detallado para el servicio afectado\n"
+        "4. Revisar despliegues recientes y cambios de configuración\n"
+        "5. Abrir una sala de guerra si se confirma impacto en clientes"
     ),
 }
 
