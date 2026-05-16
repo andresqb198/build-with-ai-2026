@@ -1,4 +1,28 @@
-version: "3.9"
+x-langfuse-env: &langfuse-env
+  DATABASE_URL: postgresql://langfuse:langfuse@postgres:5432/langfuse
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_USER: default
+  CLICKHOUSE_PASSWORD: "langfuse"
+  REDIS_CONNECTION_STRING: redis://redis:6379
+  NEXTAUTH_URL: http://localhost:3000
+  NEXTAUTH_SECRET: workshop-secret-change-me-in-production
+  SALT: workshop-salt-change-me-in-production
+  ENCRYPTION_KEY: "0000000000000000000000000000000000000000000000000000000000000000"
+  TELEMETRY_ENABLED: "true"
+  LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "true"
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse-events
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: us-east-1
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: langfuse123
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse-media
+  LANGFUSE_S3_MEDIA_UPLOAD_REGION: us-east-1
+  LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: langfuse123
+  LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
 
 services:
   postgres:
@@ -18,21 +42,105 @@ services:
       timeout: 5s
       retries: 10
 
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.12-alpine
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+      CLICKHOUSE_PASSWORD: "langfuse"
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - chdata:/var/lib/clickhouse
+      - ./clickhouse-config.xml:/etc/clickhouse-server/config.d/cluster.xml:ro
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-client --query='SELECT 1' || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: langfuse
+      MINIO_ROOT_PASSWORD: langfuse123
+    ports:
+      - "9002:9000"
+      - "9001:9001"
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+        mc alias set local http://minio:9000 langfuse langfuse123 &&
+        mc mb --ignore-existing local/langfuse-events &&
+        mc mb --ignore-existing local/langfuse-media
+      "
+
   langfuse:
-    image: langfuse/langfuse:2
+    image: langfuse/langfuse:3
     restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://langfuse:langfuse@postgres:5432/langfuse
-      NEXTAUTH_URL: http://localhost:3000
-      NEXTAUTH_SECRET: workshop-secret-change-me-in-production
-      SALT: workshop-salt-change-me-in-production
-      TELEMETRY_ENABLED: "true"
-      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "true"
+      <<: *langfuse-env
+
+  langfuse-worker:
+    image: langfuse/langfuse-worker:3
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    environment:
+      <<: *langfuse-env
 
 volumes:
   pgdata:
+  chdata:
+  redisdata:
+  miniodata:

@@ -118,6 +118,7 @@ def run_incident(incident_id: str) -> None:
             config={"callbacks": [handler]},
         )
 
+    handler._langfuse_client.flush()  # Ensure all traces are sent before display/exit
     display_results(result)
 
     console.print(f"\n[bold green]Trazas disponibles en:[/bold green] {LANGFUSE_HOST}")
