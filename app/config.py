@@ -10,7 +10,7 @@ DATASETS_DIR = BASE_DIR / "datasets"
 
 # Google Gemini
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
-MODEL_NAME = os.getenv("MODEL_NAME", "gemini-2.0-flash")
+MODEL_NAME = os.getenv("MODEL_NAME", "gemini-2.5-flash")
 
 # Langfuse
 LANGFUSE_PUBLIC_KEY = os.getenv("LANGFUSE_PUBLIC_KEY", "")

@@ -19,11 +19,11 @@ def display_incidents(incidents: list[dict]) -> None:
         title="Incidentes Activos — Panel de Confiabilidad de IA",
         show_lines=True,
     )
-    table.add_column("ID", style="bold cyan", width=8)
-    table.add_column("Título", width=55)
-    table.add_column("Severidad", width=10)
-    table.add_column("Servicio", width=28)
-    table.add_column("Etiquetas", width=30)
+    table.add_column("ID", style="bold cyan")
+    table.add_column("Título", ratio=3)
+    table.add_column("Severidad")
+    table.add_column("Servicio", ratio=2)
+    table.add_column("Etiquetas", ratio=2)
 
     severity_colors = {
         "critical": "bold red",

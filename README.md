@@ -96,7 +96,7 @@ app/
 ├── telemetry/      # Integración con Langfuse
 ├── main.py         # Punto de entrada CLI
 └── config.py       # Configuración del entorno
-langfuse/
+observability/
 └── docker-compose.yml
 scripts/
 ├── start.sh        # Script de inicio completo

@@ -8,7 +8,7 @@ echo "Reiniciando el entorno del taller..."
 echo ""
 
 # Detener y eliminar contenedores + volúmenes de Langfuse
-docker compose -f "$PROJECT_DIR/langfuse/docker-compose.yml" down -v 2>/dev/null || true
+docker compose -f "$PROJECT_DIR/observability/docker-compose.yml" down -v 2>/dev/null || true
 
 echo "Datos de Langfuse eliminados."
 echo ""

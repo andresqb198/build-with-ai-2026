@@ -11,7 +11,7 @@ start: ## Iniciar Langfuse y validar el entorno
 	bash scripts/start.sh
 
 stop: ## Detener los contenedores de Langfuse
-	docker compose -f langfuse/docker-compose.yml down
+	docker compose -f observability/docker-compose.yml down
 
 reset: ## Reiniciar Langfuse (elimina todos los datos)
 	bash scripts/reset.sh

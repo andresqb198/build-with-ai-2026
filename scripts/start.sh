@@ -22,7 +22,7 @@ fi
 # Iniciar Langfuse
 echo ""
 echo "Iniciando Langfuse..."
-docker compose -f "$PROJECT_DIR/langfuse/docker-compose.yml" up -d
+docker compose -f "$PROJECT_DIR/observability/docker-compose.yml" up -d
 
 echo "Esperando que Langfuse esté listo..."
 for i in $(seq 1 30); do
