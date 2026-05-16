@@ -1,0 +1,79 @@
+[
+  {
+    "incident_id": "INC-001",
+    "period": "2026-05-14",
+    "total_requests": 1547,
+    "avg_latency_ms": 1100,
+    "p99_latency_ms": 4500,
+    "total_tokens": 2340000,
+    "estimated_cost_usd": 12.50,
+    "error_rate": 0.02,
+    "affected_users": 340
+  },
+  {
+    "incident_id": "INC-002",
+    "period": "2026-05-13",
+    "total_requests": 89,
+    "avg_latency_ms": 45200,
+    "p99_latency_ms": 62000,
+    "total_tokens": 890000,
+    "estimated_cost_usd": 4.80,
+    "error_rate": 0.15,
+    "affected_users": 12
+  },
+  {
+    "incident_id": "INC-003",
+    "period": "2026-05-14",
+    "total_requests": 234,
+    "avg_latency_ms": 2100,
+    "p99_latency_ms": 3800,
+    "total_tokens": 560000,
+    "estimated_cost_usd": 3.20,
+    "error_rate": 0.0,
+    "affected_users": 0
+  },
+  {
+    "incident_id": "INC-004",
+    "period": "2026-05-12",
+    "total_requests": 156,
+    "avg_latency_ms": 12900,
+    "p99_latency_ms": 28000,
+    "total_tokens": 18500000,
+    "estimated_cost_usd": 2847.00,
+    "error_rate": 0.01,
+    "affected_users": 45
+  },
+  {
+    "incident_id": "INC-005",
+    "period": "2026-05-13",
+    "total_requests": 2340,
+    "avg_latency_ms": 3200,
+    "p99_latency_ms": 5800,
+    "total_tokens": 1200000,
+    "estimated_cost_usd": 6.40,
+    "error_rate": 0.03,
+    "affected_users": 890
+  },
+  {
+    "incident_id": "INC-006",
+    "period": "2026-05-14",
+    "total_requests": 1890,
+    "avg_latency_ms": 850,
+    "p99_latency_ms": 2200,
+    "total_tokens": 980000,
+    "estimated_cost_usd": 5.10,
+    "error_rate": 0.12,
+    "affected_users": 227
+  },
+  {
+    "incident_id": "INC-007",
+    "period": "2026-05-13",
+    "total_requests": 67,
+    "avg_latency_ms": 64500,
+    "p99_latency_ms": 95000,
+    "total_tokens": 4200000,
+    "estimated_cost_usd": 22.80,
+    "error_rate": 0.08,
+    "affected_users": 15
+  }
+]
