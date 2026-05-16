@@ -1,5 +1,7 @@
 # Build with AI Medellín 2026
 
+https://docs.google.com/presentation/d/1iftaDMtfRWuMSKFUjyaXYRzzkfLwLiFTUa2Wm_7RAGA/edit?usp=sharing
+
 **Taller de Confiabilidad y Observabilidad de Sistemas de IA**
 
 Un taller práctico donde actúas como el nuevo Equipo de Confiabilidad de IA en Google Cloud. Tu misión: estabilizar y observar un sistema de respuesta a incidentes de IA con fallas intencionales, usando LangGraph, Gemini y Langfuse.
